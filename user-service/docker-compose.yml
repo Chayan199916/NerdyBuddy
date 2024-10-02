@@ -7,12 +7,17 @@ services:
     depends_on:
       - db
     environment:
+      - NODE_ENV=development
       - DB_HOST=db
       - DB_USER=${DB_USER:-appuser}
       - DB_NAME=${DB_NAME:-nerdybuddy}
       - DB_PASSWORD=${DB_PASSWORD:-apppassword}
       - DB_PORT=5432
       - JWT_SECRET=${JWT_SECRET:-defaultsecret}
+    volumes:
+      - .:/nerdybuddy/src/app
+      - /nerdybuddy/src/app/node_modules
+    command: npm run dev
     networks:
       - app-network
 
